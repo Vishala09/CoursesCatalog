@@ -1,0 +1,15 @@
+<div>
+    <h3>Search for keywords</h3>
+    <input
+      type="text"
+      [value]="filter"
+      (input)="onInput($event.target.value)"
+      [(ngModel)]="filter"
+    />
+    <hr>
+    <h3>Category</h3>
+    <div *ngFor="let categ of categories">
+      <h2>  <input id="{{categ}}"  [value]='categ' type="radio" name="categ" (click)="getValue($event.target.value)">
+        {{categ}} </h2>
+    </div>
+</div>

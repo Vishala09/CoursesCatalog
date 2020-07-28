@@ -1,0 +1,22 @@
+<body>
+    
+    <h4>Count:{{courselength}}</h4>
+    <div class="d-flex">
+        <div class="card"  *ngFor="let course of courses">
+            <div class="card-body">
+                <h2 class="card-title">{{course.title}}</h2>
+                <h3>{{course.instructor_name}}</h3>
+                <hr>
+                <p class="card-text" >
+                    {{course.description}}
+                </p>
+                
+                <h4 *ngIf="getStatus(course.start_date,course.end_date)">{{text}}</h4>
+
+                <p><b>{{course.start_date}} to {{course.end_date}}</b></p>
+                <p><b>{{course.estimated_workload}}</b></p>
+              </div>
+        </div>
+    </div>
+    
+</body>
