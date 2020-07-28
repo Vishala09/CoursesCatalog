@@ -87,7 +87,7 @@ export class CoursesComponent implements OnInit {
      
       if(filter!=undefined && filter!="")
       {
-        alert(category+" cf  "+filter)
+       
         for (let index = 0; index < temp.length; index++) {
           const element = temp[index];
           if(element.category.includes(filter))
