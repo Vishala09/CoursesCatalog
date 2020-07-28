@@ -44,16 +44,9 @@ export class CoursesComponent implements OnInit {
   xmlhttp = new XMLHttpRequest();
   url = "../assets/scripts/all_courses.json";
 
-  gettext()
-  {
-    this.text="val";
-      return "val";
-  }
  
 
   getStatus(start_date,end_date){
-    //alert("gtti...")
-    console.log("sded")
       var sd=new Date(start_date);
       var ed=new Date(end_date);
       var td=new Date();
@@ -75,7 +68,7 @@ export class CoursesComponent implements OnInit {
   }
   searchByCategoryAndFilter(category,filter)
   {
-    //alert(category+"  "+filter)
+    
       var result=[];var temp=[];
       if(category!=="")
       {
@@ -92,8 +85,9 @@ export class CoursesComponent implements OnInit {
           temp=this.coursesdata;
       }
      
-      if(filter!=undefined)
+      if(filter!=undefined && filter!="")
       {
+        alert(category+" cf  "+filter)
         for (let index = 0; index < temp.length; index++) {
           const element = temp[index];
           if(element.category.includes(filter))
@@ -120,15 +114,12 @@ export class CoursesComponent implements OnInit {
          {
             result.push(element);
          }
-         else if(element.text.includes(filter))
-         {
-            result.push(element);
-         }
          else if(element.end_date.includes(filter))
          {
             result.push(element);
          }
          }
+         console.log("result",result);
       }
       else
       {

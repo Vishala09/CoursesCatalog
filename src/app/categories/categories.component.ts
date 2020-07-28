@@ -53,6 +53,7 @@ export class CategoriesComponent implements OnInit {
     
   onInput(value: string) {
       console.log(value);
+    
       if(this.category=="" || this.category==undefined)
       {
         const jsonmsg={type:"filter",filter:value,category:""};
