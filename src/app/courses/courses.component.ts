@@ -1,3 +1,4 @@
+import { element } from 'protractor';
 import { InteractionService } from './../interaction.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -28,6 +29,14 @@ export class CoursesComponent implements OnInit {
           cat.courses=JSON.parse(myArr.payload);
           cat.courselength=cat.courses.length;
           CoursesComponent.coursesdata=JSON.parse(myArr.payload);
+          for(let i=0;i<CoursesComponent.coursesdata.length;i++)
+          {
+            const element=CoursesComponent.coursesdata[i];
+            CoursesComponent.coursesdata[i].duration=cat.getMonthAndYear(element.start_date,element.end_date);
+            CoursesComponent.coursesdata[i].weeks=cat.getWeeks(element.start_date,element.end_date);
+            CoursesComponent.coursesdata[i].text=cat.getStatus(element.start_date,element.end_date);
+          }
+          cat.courses=CoursesComponent.coursesdata;
           console.log("cat.courses",typeof(cat.courses), cat.courses)
         }
       };
@@ -50,7 +59,7 @@ export class CoursesComponent implements OnInit {
   weeks;
 
   
-  getWeeks(date_s,date_e,index)
+  getWeeks(date_s,date_e)
   {
     let d_s = new Date(date_s);
     let d_e = new Date(date_e);
@@ -58,11 +67,10 @@ export class CoursesComponent implements OnInit {
     let weeks = ( (Difference_In_Time) / (1000 * 60 * 60 * 24 * 7));
     this.weeks = weeks;
 
-    CoursesComponent.coursesdata[index].weeks=this.weeks;
-    return 1;
+    return this.weeks+" ";
   }
 
-  getMonthAndYear(date_s,date_e,index)
+  getMonthAndYear(date_s,date_e)
   {
     const monthNames = ["January", "February", "March", "April", "May", "June",
       "July", "August", "September", "October", "November", "December"
@@ -75,16 +83,11 @@ export class CoursesComponent implements OnInit {
     const d_e = new Date(date_e);
     this.end_month= monthNames[d_e.getMonth()];
     this.end_year= d_e.getFullYear();
-    console.log(this.end_month,this.end_year,this.start_month,this.start_year)
-    CoursesComponent.coursesdata[index].start_month=this.start_month;
-    CoursesComponent.coursesdata[index].start_year=this.start_year;
-    CoursesComponent.coursesdata[index].end_month=this.end_month;
-    CoursesComponent.coursesdata[index].end_year=this.end_year;
 
-    return 1;
+    return this.start_month+" , "+ this.start_year + this.end_month+" , "+this.end_year;
   }
 
-  getStatus(start_date,end_date,indexOfelement){
+  getStatus(start_date,end_date){
       var sd=new Date(start_date);
       var ed=new Date(end_date);
       var td=new Date();
@@ -102,7 +105,6 @@ export class CoursesComponent implements OnInit {
           text="Completed"
       }
       this.text=text;
-      CoursesComponent.coursesdata[indexOfelement].text=text;
       return text;
   }
   searchByCategoryAndFilter(category,filter)
@@ -130,48 +132,40 @@ export class CoursesComponent implements OnInit {
         filter=filter.toLowerCase();
         for (let index = 0; index < temp.length; index++) {
           const element = temp[index];
-          if(element.category.toLowerCase().includes(filter))
+          console.log("sada",element.estimated_workload.toLowerCase().includes(filter));
+         if(element.title.toLowerCase().includes(filter))
          {
-            result.push(element);
-         }
-         else if(element.title.toLowerCase().includes(filter))
-         {
+           console.log("title",index);
             result.push(element);
          }
          else if(element.instructor_name.toLowerCase().includes(filter))
          {
+          console.log("instructor",index);
             result.push(element);
          }
-         else if(element.description.toLowerCase().includes(filter))
+         else if(document.getElementById('desc'+index) && document.getElementById('desc'+index).textContent.toLowerCase().includes(filter))
          {
+          console.log("desc",index);
             result.push(element);
          }
          else if(element.estimated_workload.toLowerCase().includes(filter))
          {
+          console.log("e wl",index);
             result.push(element);
          }
-         else if(element.start_month.toLowerCase().includes(filter))
+         else if(element.duration.toLowerCase().includes(filter))
          {
-            result.push(element);
-         }
-         else if(element.end_month.toLowerCase().includes(filter))
-         {
-            result.push(element);
-         }
-         else if(element.start_year.toString().toLowerCase().includes(filter))
-         {
-            result.push(element);
-         }
-         else if(element.end_year.toString().toLowerCase().includes(filter))
-         {
+           console.log("duration",index);
             result.push(element);
          }
          else if(element.weeks.toString().toLowerCase().includes(filter))
          {
+          console.log("weeks",index);
             result.push(element);
          }
          else if(element.text.toLowerCase().includes(filter))
          {
+          console.log("text",index);
             result.push(element);
          }
 
