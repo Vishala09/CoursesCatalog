@@ -32,7 +32,8 @@ export class CategoriesComponent implements OnInit {
   xmlhttp = new XMLHttpRequest();
   url = "../assets/scripts/all_categories.json";
   filter:any;
-  category:any="";
+  category:any="All";
+  
   getValue(item:string){
       
       this.category=item;

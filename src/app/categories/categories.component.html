@@ -1,15 +1,30 @@
 <div>
-    <h3>Search for keywords</h3>
-    <input
-      type="text"
-      [value]="filter"
-      (input)="onInput($event.target.value)"
-      [(ngModel)]="filter"
-    />
+    <h1>Search for keywords</h1>
+    <div class="row pl-3">
+      <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
+        <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
+      </svg>
+      <input
+        type="text"
+        [value]="filter"
+        (input)="onInput($event.target.value)"
+        [(ngModel)]="filter"
+        class="custom-control custom-radio pointer "
+        placeholder="Filter Search"
+      />
+    </div>
+    
     <hr>
-    <h3>Category</h3>
+    <h1>Category</h1>
+    <h2>
+      <input type="radio" value="All" name="categ" checked="true" (click)="getValue($event.target.value)" /> All
+    </h2>
     <div *ngFor="let categ of categories">
-      <h2>  <input id="{{categ}}"  [value]='categ' type="radio" name="categ" (click)="getValue($event.target.value)">
-        {{categ}} </h2>
+      <h2>  
+        
+        <input id="{{categ}}"  [value]='categ' type="radio" name="categ" (click)="getValue($event.target.value)" />
+        {{categ}} 
+      </h2>
     </div>
 </div>
