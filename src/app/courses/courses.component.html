@@ -32,7 +32,7 @@
                 </div>
                 <div class="col-10">
                     <div class="">
-                        <p id="desc{{indexOfelement}}" class="card-text"[innerHTML]="course.description" >
+                        <p id="desc{{course.id}}" class="card-text"[innerHTML]="course.description" >
                             
                         </p>
                     </div>
@@ -60,7 +60,7 @@
                 </div>
                 <div class="col-10">
                     <div class="">
-                        <p *ngIf="getMonthAndYear(course.start_date,course.end_date)"><b>{{start_month}},{{start_year}} - {{end_month}},{{end_year}}</b></p>
+                        <p *ngIf="getMonthAndYear(course.start_date,course.end_date)"><b>{{course.duration}}</b></p>
                         <hr>
                     </div>
                 </div>
@@ -73,7 +73,7 @@
                 </div>
                 <div class="col-10">
                     <div class="">
-                        <p *ngIf="getWeeks(course.start_date,course.end_date)"><b>{{weeks}} week course , {{course.estimated_workload}}</b></p>
+                        <p id="week{{course.id}}" *ngIf="getWeeks(course.start_date,course.end_date)"><b>{{weeks}} week course , {{course.estimated_workload}}</b></p>
                     </div>
                 </div>
             </div>

@@ -1,6 +1,7 @@
 import { InteractionService } from './../interaction.service';
 import { CategoriesService } from './../categories.service';
 import { Component, OnInit } from '@angular/core';
+import { Category } from '../models/category';
 @Component({
   selector: 'app-categories',
   templateUrl: './categories.component.html',
@@ -28,9 +29,9 @@ export class CategoriesComponent implements OnInit {
       
      
   }
-  public categories:any;
+  categories:Category[];
   xmlhttp = new XMLHttpRequest();
-  url = "../assets/scripts/all_categories.json";
+  url = "../assets/scripts/all_categories.js";
   filter:any;
   category:any="All";
   
@@ -47,9 +48,10 @@ export class CategoriesComponent implements OnInit {
       {
         const jsonmsg={type:"category",category:item,filter:this.filter};
         this.interactionService.sendMessage(JSON.stringify(jsonmsg));
+        
       }
       
-      console.log("item",typeof(item), item);
+      
   }
     
   onInput(value: string) {
